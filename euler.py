@@ -2,6 +2,8 @@ import math
 
 
 def prime_factors(n):
+    """n is an integer greater than 1."""
+    
     if n == 0:
         return []
 
@@ -21,3 +23,23 @@ def prime_factors(n):
         pfs.append(n)
 
     return pfs
+
+
+def gcd(a, b):
+    """a and b are nonnegative integers."""
+
+    while a != 0 and b != 0 and a != b:
+        if a > b:
+            a, b = a - b, b
+        else:
+            a, b = a, b - a
+
+    if a == 0:
+        return b
+    return a
+
+
+def lcm(a, b):
+    """a and b are positive integers."""
+
+    return a * b // gcd(a, b)
