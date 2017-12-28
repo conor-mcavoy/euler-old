@@ -2,8 +2,10 @@ import math
 
 
 def prime_factors(n):
-    """n is an integer greater than 1."""
-    
+    """Returns prime factors of n in a list.
+
+    n must be an integer greater than 1."""
+
     if n == 0:
         return []
 
@@ -25,8 +27,41 @@ def prime_factors(n):
     return pfs
 
 
+def nth_prime(n):
+    """Returns nth prime number.
+
+    n must be positive."""
+
+    if n <= 6:
+        sieve_size = 14
+    else:
+        sieve_size = int(n * math.log(n, math.e) + n * math.log(math.log(n, math.e), math.e))
+
+    sieve = sieve_of_erat(sieve_size)
+
+    count = 0
+    for index, p in enumerate(sieve):
+        if p:
+            count += 1
+        if count == n:
+            return index
+
+
+def sieve_of_erat(n):
+    sieve = [True for _ in range(n)]
+    sieve[0] = False
+    sieve[1] = False
+
+    for i in range(2, math.ceil(math.sqrt(n))):
+        if sieve[i]:
+            for j in range(i**2, n, i):
+                sieve[j] = False
+    return sieve
+
 def gcd(a, b):
-    """a and b are nonnegative integers."""
+    """Returns greatest common divisor of a and b.
+
+    a and b must be nonnegative integers."""
 
     while a != 0 and b != 0 and a != b:
         if a > b:
@@ -40,6 +75,8 @@ def gcd(a, b):
 
 
 def lcm(a, b):
-    """a and b are positive integers."""
+    """Returns lowest common multiple of a and b.
+
+     a and b must be positive integers."""
 
     return a * b // gcd(a, b)
