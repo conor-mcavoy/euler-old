@@ -122,3 +122,9 @@ def triangle(n):
     n must be an integer greater than 0. The 1st triangle number is 1."""
 
     return sum(range(n+1))
+
+
+def binom_coef(n, k):
+    """Returns the binomial coefficient corresponding to n and k."""
+
+    return math.factorial(n) // (math.factorial(k) * math.factorial(n-k))
